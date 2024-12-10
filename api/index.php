@@ -1,7 +1,7 @@
 <?php
 require_once "Class/HttpRequest.php";
-
-
+require_once "Controller/RentalController.php";
+require_once "Controller/SalesController.php";
 /** IMPORTANT
  * 
  *  De part le .htaccess, toutes les requêtes seront redirigées vers ce fichier index.php
@@ -24,7 +24,9 @@ require_once "Class/HttpRequest.php";
  *  On ajoutera des "routes" à $router si l'on a d'autres ressource à traiter.
  */
 $router = [
-    
+    "rental" => new RentalController(),
+    "totalrental" => new RentalController(),
+    "totalsales" => new SalesController()
 ];
 
 // objet HttpRequest qui contient toutes les infos utiles sur la requêtes (voir class/HttpRequest.php)

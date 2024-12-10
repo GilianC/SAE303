@@ -21,7 +21,7 @@ abstract class EntityRepository {
 
     protected function __construct(){
         // Modifiez ici vos informations de BDD et de connexion
-        $this->cnx = new PDO("mysql:host=127.0.0.1:8889;dbname=mora", "root", "root");
+        $this->cnx = new PDO("mysql:host=localhost;dbname=cannier1", "cannier1", "cannier1");
     }
 
     /**
@@ -29,7 +29,7 @@ abstract class EntityRepository {
      *  Query the data base for the entity with id $id.
      *  Must return an Entity object or false if the query fails
      */
-    abstract public function find($id);
+    // abstract public function find($id);
 
     /**
      *  findAll
@@ -44,19 +44,19 @@ abstract class EntityRepository {
      *  Update the Entity object with its data base id.
      *  Must return true or false if it fails to save the object.
      */
-    abstract public function save($entity);
+    // abstract public function save($entity);
 
-    /**
-     *  delete
-     *  delete in the data base Entity object with id $id
-     *  Must return true or false if it fails to delete the object.
-     */
-    abstract public function delete($id);
+    // /**
+    //  *  delete
+    //  *  delete in the data base Entity object with id $id
+    //  *  Must return true or false if it fails to delete the object.
+    //  */
+    // abstract public function delete($id);
 
-     /**
-     *  udpate
-     *  update in the data base Entity object $entity
-     *  Must return true or false if it fails to delete the object.
-     */
-    abstract public function update($entity);
+    //  /**
+    //  *  udpate
+    //  *  update in the data base Entity object $entity
+    //  *  Must return true or false if it fails to delete the object.
+    //  */
+    // abstract public function update($entity);
 }
