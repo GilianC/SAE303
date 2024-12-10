@@ -38,13 +38,10 @@ class SalesRepository extends EntityRepository {
         return $res;
     }
 
-    public function getTotalSalesPrice(): float {
-        $requete = $this->cnx->prepare("SELECT purchase_price FROM Sales WHERE purchase_date > :date");
-        $cdate = date('Y-m-01');
-        $requete->bindParam(':date', $cdate, PDO::PARAM_STR);
+    public function getTotalSalesPrice() {
+        $requete = $this->cnx->prepare("  SELECT SUM(purchase_price) as total FROM Sales WHERE MONTH(purchase_date) = MONTH(CURDATE()) AND YEAR(purchase_date) = YEAR(CURDATE());");
         $requete->execute();
-        $prices = $requete->fetchAll(PDO::FETCH_COLUMN, 0);
-        $total = array_sum($prices);
-        return $total ? $total : 0.0;
+        $result = $requete->fetch(PDO::FETCH_OBJ); 
+        return $result ? $result : 0.0;
     }
 }

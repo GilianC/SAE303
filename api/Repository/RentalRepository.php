@@ -40,15 +40,12 @@ class RentalRepository extends EntityRepository {
         // var_dump($res);
         return $res;
     }
-    public function getTotalRentalPrice(): float {
-        $requete = $this->cnx->prepare("SELECT rental_price FROM Rentals Where rental_date > :date");
-        $cdate = date('Y-m-01');
-        $requete-> bindParam(':date', $cdate, PDO :: PARAM_STR);
+    public function getTotalRentalPrice() {
+        // $requete = $this->cnx->prepare("SELECT Sum(rental_price) as total FROM Rentals Where rental_date > :date");
+        $requete = $this->cnx->prepare("SELECT SUM(rental_price) as total FROM Rentals WHERE MONTH(rental_date) = MONTH(CURDATE()) AND YEAR(rental_date) = YEAR(CURDATE());");
         $requete->execute();
         $result = $requete->fetch(PDO::FETCH_OBJ); 
-        $prices = $requete->fetchAll(PDO::FETCH_COLUMN, 0);
-        $total = array_sum($prices);
-        $result = (object) ['total' => $total];
+
         return $result ? $result->total : 0.0;
     }
 
