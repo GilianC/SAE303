@@ -13,6 +13,18 @@ SalesData.fetchGenrePerMonth = async function() {
 
     return sortedData;
 }
+SalesData.listMapsByGenre = async function() {
+    let data = await this.fetchGenrePerMonth();
+    let genreMap = new Map();
 
+    data.forEach(item => {
+        if (!genreMap.has(item.genre)) {
+            genreMap.set(item.genre, []);
+        }
+        genreMap.get(item.genre).push(item);
+    });
+
+    return genreMap;
+};
 
 export {SalesData};
